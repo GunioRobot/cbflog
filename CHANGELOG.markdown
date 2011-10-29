@@ -29,7 +29,7 @@ Support/Developer/Shared/Xcode/Specifications/)
 02/25/09:CBF
 ------------
 - Now defaults to using printf instead of NSLog. Slightly faster, but more
-	importantly, it doesn't pollute your console/system.logs. There is also 
+	importantly, it doesn't pollute your console/system.logs. There is also
 	less before our information. You probably don't need
 	it to tell you what the project name is, time, thread, etc.
 - Now logs function name containing the log statement

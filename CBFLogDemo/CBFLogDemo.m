@@ -1,4 +1,4 @@
-/* 
+/*
  * CBFLog is a singleton logging object for more powerful logging in your cocoa projects
  *
  * Permission is hereby granted, free of charge, to any person
@@ -9,10 +9,10 @@
  * copies of the Software, and to permit persons to whom the
  * Software is furnished to do so, subject to the following
  * conditions:
- * 
+ *
  * The above copyright notice and this permission notice shall be
  * included in all copies or substantial portions of the Software.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
  * EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
  * OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -23,10 +23,10 @@
  * OTHER DEALINGS IN THE SOFTWARE.
  *
  * CBFLogDemo.m
- * 
+ *
  * Created by Camron Flanders on 2.23.09
  * Copyright 2009 camronflanders. All rights reserved.
- * 
+ *
  */
 
 
@@ -35,7 +35,7 @@
 
 int main (int argc, const char * argv[]) {
     NSAutoreleasePool * pool = [[NSAutoreleasePool alloc] init];
-	
+
 	// statements of higher severity than current LOG_LEVEL will be displayed.
 	// i.e. if LOG_LEVEL is at level 3 (warning), then WARNING, ERROR, & CRITICAL
 	// messages will be output.
@@ -48,10 +48,10 @@ int main (int argc, const char * argv[]) {
 	cbfWarning(@"Here is a warning level statement.");
 	cbfError(@"Here is a error level statement.");
 	cbfCritical(@"Here is a critical level statment.");
-	
+
 	// easily add a truely blank line
 	cbfBlank();
-	
+
 	// these will display as long as _CBFLOG_ENABLED is defined, as they override
 	// the soft switch.
 	cbfLog(5, YES, @"debug statment, soft switch overridden.");
@@ -60,13 +60,13 @@ int main (int argc, const char * argv[]) {
 	cbfLog(2, YES, @"warning statment, soft switch overridden.");
 	cbfLog(1, YES, @"error statment, soft switch overridden.");
 	cbfLog(0, YES, @"critical statment, soft switch overridden.");
-	
+
 	cbfBlank();
-	
+
 	NSLog(@"just a nslog test.");
-	
+
 	// done with demo.
-	
+
     [pool drain];
     return 0;
 }

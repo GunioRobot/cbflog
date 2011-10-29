@@ -1,4 +1,4 @@
-/* 
+/*
  * CBFLog is a singleton logging object for more powerful logging in your cocoa projects
  *
  * Permission is hereby granted, free of charge, to any person
@@ -9,10 +9,10 @@
  * copies of the Software, and to permit persons to whom the
  * Software is furnished to do so, subject to the following
  * conditions:
- * 
+ *
  * The above copyright notice and this permission notice shall be
  * included in all copies or substantial portions of the Software.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
  * EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
  * OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -23,10 +23,10 @@
  * OTHER DEALINGS IN THE SOFTWARE.
  *
  * CBFLog.h
- * 
+ *
  * Created by Camron Flanders on 2.23.09
  * Copyright 2009 camronflanders. All rights reserved.
- * 
+ *
  */
 
 #import <Foundation/Foundation.h>
@@ -45,14 +45,14 @@
 #define LOG_PATH            YES         // if NO, no path (full or partial) will be output
 #define LOG_FULL_PATH		NO			// if NO, outputs just filename. YES, output abs path
 #define LOG_LINE_NUM        YES         // if YES, line number of log statment will be output
-#define LOG_FUNC_NAME       YES         // if YES, function containing log will be output 
+#define LOG_FUNC_NAME       YES         // if YES, function containing log will be output
 
 #define FILE_NAME_LENGTH	20			// length of file name in output. name will be center-truncated if longer, padded if shorter.
 #define FUNC_NAME_LENGTH	20			// length of function name in output. name will be center-truncated if longer, padded if shorter.
 #define LINE_NUM_PADDING	4			// digits to pad line num
 
 #define DISABLE_NSLOG_WITH_CBFLOG	0	// 0 or 1 (NO / YES).
-										// If 1 (YES) and _CBFLOG_ENABLED is not defined, 
+										// If 1 (YES) and _CBFLOG_ENABLED is not defined,
 										// NSLog statements will also be disabled.
 
 /* ****** END CONFIGURATION ******* */

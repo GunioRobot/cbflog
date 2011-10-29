@@ -1,4 +1,4 @@
-/* 
+/*
  * CBFLog is a singleton logging object for more powerful logging in your cocoa projects
  *
  * Permission is hereby granted, free of charge, to any person
@@ -9,10 +9,10 @@
  * copies of the Software, and to permit persons to whom the
  * Software is furnished to do so, subject to the following
  * conditions:
- * 
+ *
  * The above copyright notice and this permission notice shall be
  * included in all copies or substantial portions of the Software.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
  * EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
  * OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -23,10 +23,10 @@
  * OTHER DEALINGS IN THE SOFTWARE.
  *
  * CBFLog.m
- * 
+ *
  * Created by Camron Flanders on 2.23.09
  * Copyright 2009 camronflanders. All rights reserved.
- * 
+ *
  */
 
 #import "CBFLog.h"
@@ -45,7 +45,7 @@
 		int maxLength = theLength - 3; // 3 is the length of the separator
 		range.length = [self length] - maxLength;
 		range.location = floor(maxLength/2);
-				
+
 		return [self stringByReplacingCharactersInRange:range withString:@"..."];
 	}
 }
@@ -81,22 +81,22 @@ static NSString *blankString = @"";
 }
 
 + (void)initialize
-{	
-	if(!sharedDebug) 
+{
+	if(!sharedDebug)
 		sharedDebug = [[self alloc] init];
-		
+
 	if(severityLevels == nil)
-		severityLevels = [[NSArray alloc] initWithObjects:	@"CRITICAL", 
-															@" ERROR  ", 
-															@"WARNING ", 
+		severityLevels = [[NSArray alloc] initWithObjects:	@"CRITICAL",
+															@" ERROR  ",
+															@"WARNING ",
 															@" NOTIFY ",
-															@"  INFO  ", 
+															@"  INFO  ",
 															@" DEBUG  ", nil];
 }
 
 + (id) allocWithZone:(NSZone *) zone
 {
-	if (sharedDebug) 
+	if (sharedDebug)
 	{
 		//The caller expects to receive a new object, so implicitly retain it to balance out the caller's eventual release message.
 		return [sharedDebug retain];
@@ -110,9 +110,9 @@ static NSString *blankString = @"";
 }
 
 - (id) init {
-    if (!hasInited) 
+    if (!hasInited)
 	{
-        if ((self = [super init])) 
+        if ((self = [super init]))
 		{
             hasInited = YES;
         }
@@ -128,21 +128,21 @@ static NSString *blankString = @"";
 	// check to see if we have disabled debugging globally and return unless
 	// we want to override the global setting for this statment.
 	if(!GLOBAL_SOFT_ENABLE && !override) return;
-	
+
 	// if we are below our threshold, return
 	if(severity > LOG_LEVEL) return;
-	
+
 	va_list argList;
 	va_start(argList, message);
-	NSString *messageString = [[[NSString alloc] initWithFormat:message 
+	NSString *messageString = [[[NSString alloc] initWithFormat:message
 													  arguments:argList] autorelease];
 	va_end(argList);
-	
+
 
 	NSString *logString;
 	if(!BARE_OUTPUT)
 	{
-		
+
 		if(LOG_SEVERITY)
 		{
 			int outputLevel = (severity) ? severity : 0;
@@ -153,38 +153,38 @@ static NSString *blankString = @"";
 
 		if(LOG_PATH)
 		{
-			filePathString = [[[NSString alloc] initWithBytes:file 
-												 length:strlen(file) 
+			filePathString = [[[NSString alloc] initWithBytes:file
+												 length:strlen(file)
 											   encoding:NSUTF8StringEncoding] autorelease];
 			if(!LOG_FULL_PATH)
 				filePathString = [filePathString lastPathComponent];
 		} else
 			filePathString = blankString;
-							
+
 		filePathString = [filePathString handleWithMaxLength:FILE_NAME_LENGTH];
-		
+
 		if(LOG_LINE_NUM)
 			lineNumString = [NSString stringWithFormat:lineNumberStringFormat, line];
 		else
 			lineNumString = blankString;
-		
+
 		lineNumString = [lineNumString stringByPaddingToLength:LINE_NUM_PADDING withString:@" " startingAtIndex:0];
-		
+
 		if(LOG_FUNC_NAME)
 			functionNameString = [NSString stringWithFormat:functionNameStringFormat, funcNameString];
 		else
 			functionNameString = blankString;
-		
+
 		functionNameString = [functionNameString handleWithMaxLength:FUNC_NAME_LENGTH];
-		
+
 		logString = [[[NSString alloc] initWithFormat:@"%@%@%@%@%@", levelString,
-																	 filePathString, 
+																	 filePathString,
 																	 lineNumString,
 																	 functionNameString,
 																	 messageString] autorelease];
 	} else
 		logString = [[[NSString alloc] initWithString:messageString] autorelease];
-	
+
 	if(USE_NSLOG)
 		NSLog(@"%@", logString);
 	else
